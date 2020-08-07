@@ -1,0 +1,90 @@
+symbols = []
+symbols = input()
+
+print("---------")
+print("| " + symbols[0] + " " + symbols[1] + " " + symbols[2] + " |")
+print("| " + symbols[3] + " " + symbols[4] + " " + symbols[5] + " |")
+print("| " + symbols[6] + " " + symbols[7] + " " + symbols[8] + " |")
+print("---------")
+
+
+
+def check_if_impossible():
+    num_of_x = 0
+    num_of_o = 0
+    for i in range(0, 9):
+        if symbols[i] == "X":
+            num_of_x += 1
+        elif symbols[i] == "O":
+            num_of_o += 1
+    if num_of_x > num_of_o + 1 or num_of_o > num_of_x + 1:
+        print('Impossible')
+        quit()
+
+
+
+def check_if_win():
+    # check rows
+    row_1 = symbols[0] == symbols[1] == symbols[2] != " "
+    row_2 = symbols[3] == symbols[4] == symbols[5] != " "
+    row_3 = symbols[6] == symbols[7] == symbols[8] != " "
+
+ # check columns
+    col_1 = symbols[0] == symbols[3] == symbols[6] != " "
+    col_2 = symbols[1] == symbols[4] == symbols[7] != " "
+    col_3 = symbols[2] == symbols[5] == symbols[8] != " "
+
+    # check diagonals
+    diag_1 = symbols[0] == symbols[4] == symbols[8] != " "
+    diag_2 = symbols[6] == symbols[4] == symbols[2] != " "
+
+    my_list = [row_1, row_2, row_3, col_1, col_2, col_3, diag_1, diag_2]
+    n_of_wins = 0
+    for i in my_list:
+        if i == True:
+            n_of_wins += 1
+            if n_of_wins > 1:
+                print("Impossible")
+                quit()
+
+    if row_1 == True:
+        print(symbols[0] + ' wins')
+        quit()
+    if row_2 == True:
+        print(symbols[3] + ' wins')
+        quit()
+    if row_3 == True:
+        print(symbols[6] + ' wins')
+        quit()
+    if col_1 == True:
+        print(symbols[0] + ' wins')
+        quit()
+    if col_2 == True:
+        print(symbols[1] + ' wins')
+        quit()
+    if col_3 == True:
+        print(symbols[2] + ' wins')
+        quit()
+    if diag_1 == True:
+        print(symbols[0] + ' wins')
+        quit()
+    if diag_2 == True:
+        print(symbols[6] + ' wins')
+        quit()
+
+def check_if_tie_or_draw():
+    num_of_empty_spaces = 0
+    for i in range(0, 9):
+        if symbols[i] == "_":
+            num_of_empty_spaces += 1
+    if num_of_empty_spaces > 0:
+        print('Game not finished')
+        quit()
+    elif num_of_empty_spaces == 0:
+        print('Draw')
+        quit()
+
+
+check_if_impossible()
+check_if_win()
+check_if_tie_or_draw()
